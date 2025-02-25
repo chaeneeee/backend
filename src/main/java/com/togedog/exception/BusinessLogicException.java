@@ -10,4 +10,6 @@ public class BusinessLogicException extends RuntimeException {
         super(exceptionCode.getStatusDescription());
         this.exceptionCode = exceptionCode;
     }
+
+
 }

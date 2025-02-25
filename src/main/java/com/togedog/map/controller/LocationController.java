@@ -15,7 +15,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.security.core.Authentication;
 
 @RestController
-@RequestMapping("/api")
 @CrossOrigin(origins = "http://localhost:3000")  // localhost:3000에서 오는 요청을 허용
 public class LocationController {
 
@@ -67,10 +66,12 @@ public class LocationController {
 
     // 저장된 위치 데이터를 반환
     @GetMapping("/location")
-    public ResponseEntity<LocationService.Location> getLocation() {
-        LocationService.Location location = locationService.getLocation("user:location");
+    public ResponseEntity<LocationService.Location> getLocation(Authentication authentication) {
+        String userEmail = authentication.getName(); // 현재 로그인한 사용자 이메일 가져오기
+        LocationService.Location location = locationService.getLocation("user:location", userEmail);
         return ResponseEntity.ok(location);
     }
+
 
     @Getter
     @Setter
