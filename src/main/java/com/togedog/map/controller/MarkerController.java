@@ -12,7 +12,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api")
 @CrossOrigin(origins = "http://localhost:3000")
 public class MarkerController {
     private final MarkerService markerService;
