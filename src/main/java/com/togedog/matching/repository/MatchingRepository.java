@@ -12,6 +12,7 @@ import java.util.Optional;
 
 public interface MatchingRepository extends JpaRepository<Matching, Long> {
 
+    
     // 중복 매칭 방지를 위한 진행 중인 매칭 조회 (MATCH_COMPLETED 제외)
     //서로 매칭을 요청한 경우 찾아 완료된 매칭을 제외하고 매칭 시켜주기
     @Query("SELECT m FROM Matching m WHERE " +
