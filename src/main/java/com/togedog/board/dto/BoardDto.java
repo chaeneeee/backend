@@ -2,11 +2,7 @@ package com.togedog.board.dto;
 
 import com.togedog.board.entity.BoardType;
 import com.togedog.comment.dto.CommentDto;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.Builder;
+import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;

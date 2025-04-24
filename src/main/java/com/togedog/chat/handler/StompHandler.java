@@ -1,21 +1,11 @@
 package com.togedog.chat.handler;
 
 import com.togedog.auth.jwt.JwtTokenizer;
-import com.togedog.exception.BusinessLogicException;
-import com.togedog.exception.ExceptionCode;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.messaging.Message;
-import org.springframework.messaging.MessageChannel;
-import org.springframework.messaging.simp.stomp.StompCommand;
-import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.messaging.support.ChannelInterceptor;
-import org.springframework.messaging.support.MessageHeaderAccessor;
-import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 @Component

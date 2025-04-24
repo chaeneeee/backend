@@ -8,14 +8,8 @@ import com.togedog.member.service.MemberService;
 import com.togedog.redis.MarkerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.togedog.eventListener.EventCaseEnum.EventCase.*;
 
 @Slf4j
 @Component

@@ -1,7 +1,5 @@
 package com.togedog.likes.controller;
 
-import com.togedog.exception.BusinessLogicException;
-import com.togedog.exception.ExceptionCode;
 import com.togedog.likes.dto.LikesDto;
 import com.togedog.likes.service.LikesService;
 import lombok.RequiredArgsConstructor;

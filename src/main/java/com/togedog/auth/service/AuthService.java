@@ -5,7 +5,6 @@ import com.togedog.exception.BusinessLogicException;
 import com.togedog.exception.ExceptionCode;
 import com.togedog.member.entity.Member;
 import com.togedog.member.repository.MemberRepository;
-import com.togedog.redis.tool.RedisTool;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;

@@ -3,7 +3,6 @@ package com.togedog.chatRoom.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.togedog.audit.Auditable;
 import com.togedog.chat.entity.Chat;
-import com.togedog.matchingStandBy.entity.MatchingStandBy;
 import com.togedog.member.entity.Member;
 import lombok.Getter;
 import lombok.Setter;

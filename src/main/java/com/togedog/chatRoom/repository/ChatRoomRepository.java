@@ -1,8 +1,6 @@
 package com.togedog.chatRoom.repository;
 
 import com.togedog.chatRoom.entity.ChatRoom;
-import com.togedog.chatRoom.entity.ChatRoomMember;
-import com.togedog.member.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

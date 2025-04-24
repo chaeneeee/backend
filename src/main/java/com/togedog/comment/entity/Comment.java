@@ -5,11 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.togedog.board.entity.Board;
 import com.togedog.member.entity.Member;
 import com.togedog.reply.entity.Reply;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.Builder;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;

@@ -1,10 +1,9 @@
 package com.togedog.eventListener;
 
+import com.togedog.eventListener.EventCaseEnum.EventCase;
 import lombok.Getter;
 import org.springframework.context.ApplicationEvent;
-import com.togedog.eventListener.EventCaseEnum.EventCase;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter

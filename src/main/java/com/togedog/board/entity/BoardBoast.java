@@ -2,10 +2,9 @@ package com.togedog.board.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 
 @Entity
 @Getter

@@ -1,12 +1,12 @@
 package com.togedog.matching.entity;
 
+import com.togedog.audit.Auditable;
 import com.togedog.matchingStandBy.entity.MatchingStandBy;
 import com.togedog.member.entity.Member;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import com.togedog.audit.Auditable;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -58,6 +58,9 @@ public class Matching extends Auditable {
         }
         this.hostMember = member;
     }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "guest_member_id")
+    private Member guestMember; // 새로운 매칭 상대방 필드 추가
 
 
 
@@ -65,7 +68,8 @@ public class Matching extends Auditable {
     public enum MatchStatus{
         MATCH_HOSTING(1,"매칭 호스팅 중"),
         MATCH_CANCEL(2,"매칭 취소"),
-        MATCH_SUCCESS(3,"매칭 성공");
+        MATCH_SUCCESS(3,"매칭 성공"),
+        MATCH_COMPLETED(4, "매칭 완료");
 
         @Getter
         private int statusNumber;

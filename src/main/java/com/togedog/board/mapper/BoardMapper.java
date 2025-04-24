@@ -2,21 +2,13 @@ package com.togedog.board.mapper;
 
 import com.togedog.board.dto.BoardDto;
 import com.togedog.board.dto.BoardDto.ResponseBoard;
-import com.togedog.board.entity.BoardBoast;
-import com.togedog.board.entity.BoardInquiry;
-import com.togedog.board.entity.BoardReview;
-import com.togedog.board.entity.BoardType;
-import com.togedog.board.entity.BoardAnnouncement;
-import com.togedog.board.entity.Board;
-import com.togedog.comment.dto.CommentDto;
+import com.togedog.board.entity.*;
 import com.togedog.comment.dto.CommentDto.Response;
 import com.togedog.comment.entity.Comment;
-
 import com.togedog.member.entity.Member;
 import com.togedog.reply.dto.ReplyDto;
 import com.togedog.reply.entity.Reply;
 import org.mapstruct.Mapper;
-
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -48,8 +40,8 @@ public interface BoardMapper {
 
     Board boardDtoPatchToBoard(BoardDto.Patch requestBody);
 
-    default BoardDto.ResponseBoard boardToBoardDtoResponse(Board board) {
-        BoardDto.ResponseBoard responseBoard = new BoardDto.ResponseBoard();
+    default ResponseBoard boardToBoardDtoResponse(Board board) {
+        ResponseBoard responseBoard = new ResponseBoard();
 
         responseBoard.setBoardId(board.getBoardId());
         responseBoard.setTitle(board.getTitle());
@@ -61,11 +53,11 @@ public interface BoardMapper {
         responseBoard.setLikesCount(board.getLikesCount() != null ? board.getLikesCount() : 0);
         responseBoard.setViewCount(board.getViewCount() != null ? board.getViewCount() : 0);
 
-        List<CommentDto.Response> commentList = board.getComments()
+        List<Response> commentList = board.getComments()
                 .stream()
                 .filter(c -> c.getCommentStatus() != Comment.CommentStatus.COMMENT_DELETED)
                 .map(c -> {
-                    CommentDto.Response commentResponseDto = new CommentDto.Response();
+                    Response commentResponseDto = new Response();
                     commentResponseDto.setCommentId(c.getCommentId());
                     commentResponseDto.setComment(c.getComment());
                     commentResponseDto.setName(c.getMember().getName());

@@ -10,16 +10,11 @@ import com.togedog.matchingStandBy.repository.MatchingStandByRepository;
 import com.togedog.member.entity.Member;
 import com.togedog.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.Duration;
@@ -29,6 +24,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Collectors;
+
 import static com.togedog.eventListener.EventCaseEnum.EventCase.*;
 
 @Service

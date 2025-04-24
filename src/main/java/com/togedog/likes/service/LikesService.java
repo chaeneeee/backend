@@ -4,7 +4,6 @@ import com.togedog.board.entity.Board;
 import com.togedog.board.repository.BoardRepository;
 import com.togedog.exception.BusinessLogicException;
 import com.togedog.exception.ExceptionCode;
-import com.togedog.likes.dto.LikesDto;
 import com.togedog.likes.entity.Likes;
 import com.togedog.likes.repository.LikesRepository;
 import com.togedog.member.entity.Member;

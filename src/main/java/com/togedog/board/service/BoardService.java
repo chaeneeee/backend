@@ -5,23 +5,16 @@ import com.togedog.board.entity.BoardType;
 import com.togedog.board.repository.BoardRepository;
 import com.togedog.exception.BusinessLogicException;
 import com.togedog.exception.ExceptionCode;
-import com.togedog.likes.dto.LikesDto;
-import com.togedog.likes.entity.Likes;
-import com.togedog.likes.repository.LikesRepository;
 import com.togedog.member.entity.Member;
 import com.togedog.member.repository.MemberRepository;
-import com.togedog.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.Authentication;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-
-import javax.persistence.PersistenceContext;
 
 import java.time.LocalDateTime;
 import java.util.Optional;

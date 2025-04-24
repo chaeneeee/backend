@@ -3,7 +3,6 @@ package com.togedog.chatRoom.dto;
 import com.togedog.chatRoom.entity.ChatRoomMember;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.scheduling.quartz.LocalDataSourceJobStore;
 
 import java.time.LocalDateTime;
 import java.util.List;

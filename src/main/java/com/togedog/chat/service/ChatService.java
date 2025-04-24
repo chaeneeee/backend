@@ -1,10 +1,8 @@
 package com.togedog.chat.service;
 
-import com.togedog.chat.dto.ChatDto;
 import com.togedog.chat.entity.Chat;
 import com.togedog.chat.mapper.ChatMapper;
 import com.togedog.chat.repository.ChatRepository;
-import com.togedog.chatRoom.entity.ChatRoom;
 import com.togedog.chatRoom.repository.ChatRoomMemberRepository;
 import com.togedog.chatRoom.repository.ChatRoomRepository;
 import com.togedog.exception.BusinessLogicException;
@@ -15,7 +13,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;

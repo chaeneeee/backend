@@ -29,4 +29,13 @@ public interface MatchingRepository extends JpaRepository<Matching, Long> {
     Optional<Matching> findByHostMember(Member member);
 
     List<Matching> findByHostMemberIdOrHostMemberId(long hostMemberId, long guestMemberId);
+
+        @Query("SELECT m FROM Matching m WHERE ((m.hostMember.memberId = :memberId AND m.guestMember.memberId = :guestId) " +
+                "OR (m.hostMember.memberId = :guestId AND m.guestMember.memberId = :memberId)) " +
+                "AND m.matchStatus IN ('MATCH_REQUESTED', 'MATCH_CONFIRMED')") // 완료된 매칭은 제외
+        Optional<Matching> findOngoingMatchBetweenMembers(@Param("memberId") Long memberId, @Param("guestId") Long guestId);
+
+
+
+
 }

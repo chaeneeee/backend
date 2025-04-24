@@ -1,7 +1,5 @@
 package com.togedog.scheduler;
 
-import com.togedog.matchingStandBy.entity.MatchingStandBy;
-import com.togedog.matchingStandBy.repository.MatchingStandByRepository;
 import com.togedog.matchingStandBy.service.MatchingStandByService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Async;
@@ -9,8 +7,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 @Component
 @RequiredArgsConstructor

@@ -1,6 +1,8 @@
 package com.togedog.likes.dto;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 public class LikesDto {
     @Getter

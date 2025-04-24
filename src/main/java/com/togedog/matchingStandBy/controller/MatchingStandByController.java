@@ -1,6 +1,5 @@
 package com.togedog.matchingStandBy.controller;
 
-import com.togedog.dto.MultiResponseDto;
 import com.togedog.dto.SingleResponseDto;
 import com.togedog.matchingStandBy.dto.MatchingStandByDto;
 import com.togedog.matchingStandBy.entity.MatchingStandBy;
@@ -8,7 +7,6 @@ import com.togedog.matchingStandBy.mapper.MatchingStandByMapper;
 import com.togedog.matchingStandBy.service.MatchingStandByService;
 import com.togedog.utils.UriCreator;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
