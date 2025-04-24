@@ -3,6 +3,7 @@ package com.togedog.redis;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.togedog.exception.CacheOperationException;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -10,10 +11,15 @@ import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.CacheEvict;
 
 import java.io.IOException;
+
+import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -43,6 +49,7 @@ public class LocationService {
             System.err.println("Redis 직렬화 오류: " + e.getMessage());
         } catch (Exception e) {
             System.err.println("Redis 저장 실패: " + e.getMessage());
+
         }
 
         return location;
@@ -108,21 +115,51 @@ public class LocationService {
 //        }
 //    }
 
-    public Set<String> getKeysByPattern(String pattern) {
-        return redisTemplate.keys(pattern);
-    }
+    /**
+     * 사용자 위치 정보를 Redis에서 조회
+     * - 캐싱 적용 (Spring Cache 사용)
+     */
+    @Cacheable(value = "userLocationCache", key = "T(String).format('userLocation:%s:%s', #locationKey, #userEmail)", unless = "#result == null")
+    public Location getLocation(String locationKey, String userEmail) {
+        try {
+            String finalKey = locationKey + ":" + userEmail;
+            String locationValue = (String) redisTemplate.opsForValue().get(finalKey);
 
-    @Getter
-    @Setter
-    public static class Location {
-        private double latitude;
-        private double longitude;
+            if (locationValue == null) {
+                System.out.println("⚠️ Redis에 저장된 위치 데이터 없음: " + finalKey);
+                return null;
+            }
 
-        public Location() {}
-
-        public Location(double latitude, double longitude) {
-            this.latitude = latitude;
-            this.longitude = longitude;
+            return objectMapper.readValue(locationValue, Location.class);
+        } catch (IOException e) {
+            throw new CacheOperationException("데이터 역직렬화 실패 (JSON 변환 오류)", e);
+        } catch (RedisConnectionFailureException e) {
+            throw new CacheOperationException("Redis 연결 실패 (서버 다운 또는 네트워크 오류)", e);
+        } catch (DataAccessException e) {
+            throw new CacheOperationException("Redis 데이터 접근 오류", e);
+        } catch (Exception e) {
+            throw new CacheOperationException("알 수 없는 Redis 조회 오류 발생", e);
         }
     }
+
+    /**
+     * 특정 패턴을 가진 Redis 키 목록 조회
+     */
+
+
+
+    /**
+     * 특정 사용자 위치 데이터 삭제 (캐시 무효화)
+     */
+    @CacheEvict(value = "userLocationCache", key = "#locationKey + ':' + #userEmail")
+    public void deleteLocation(String locationKey, String userEmail) {
+        try {
+            String finalKey = locationKey + ":" + userEmail;
+            redisTemplate.delete(finalKey);
+            System.out.println("Location deleted from Redis: " + finalKey);
+        } catch (Exception e) {
+            throw new CacheOperationException("Redis 삭제 오류 발생", e);
+        }
+    }
+
 }

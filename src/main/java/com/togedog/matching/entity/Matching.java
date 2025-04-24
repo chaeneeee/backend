@@ -44,8 +44,13 @@ public class Matching extends Auditable {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "MEMBER_ID")
+    @JoinColumn(name = "HOST_MEMBER_ID")
     private Member hostMember;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "GUEST_MEMBER_ID")
+    private Member guestMember;
+
 
     public void addMember(Member member) {
         if (!member.getMatchings().contains(this)) {
@@ -56,6 +61,8 @@ public class Matching extends Auditable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "guest_member_id")
     private Member guestMember; // 새로운 매칭 상대방 필드 추가
+
+
 
     @AllArgsConstructor
     public enum MatchStatus{

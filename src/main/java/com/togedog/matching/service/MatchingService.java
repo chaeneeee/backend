@@ -30,12 +30,12 @@ public class MatchingService {
     private final MatchingRepository matchingRepository;
     private final MemberRepository memberRepository;
     private final ApplicationEventPublisher eventPublisher;
-
     public Matching createMatch(Matching matching, Authentication authentication) {
         Member member = extractMemberFromAuthentication(authentication);
 
         Optional<Matching> optionalMatching =
                 matchingRepository.findByHostMemberAndMatchStatus(member, Matching.MatchStatus.MATCH_HOSTING);
+
 
         if (optionalMatching.isPresent()) {
             Matching findMatch = optionalMatching.get();
@@ -43,6 +43,7 @@ public class MatchingService {
             findMatch.setLongitude(matching.getLongitude());
             return matchingRepository.save(findMatch);
         } else {
+            // ✅ 새로운 매칭 생성
             matching.setHostMember(member);
             matching.setHostMemberId(member.getMemberId());
             Matching saved = matchingRepository.save(matching);
@@ -50,6 +51,7 @@ public class MatchingService {
             return saved;
         }
     }
+
 
     public Matching updateMatch(Matching matching, Authentication authentication) {
         Member member = extractMemberFromAuthentication(authentication);
@@ -63,10 +65,22 @@ public class MatchingService {
             eventPublisher.publishEvent(event);
             event = new CustomEvent(this, DELETE_MARKER, findMatching.getHostMember().getEmail());
             eventPublisher.publishEvent(event);
+
         }
 
         return matchingRepository.save(findMatching);
     }
+
+    private void publishMatchCancelEvents(Matching findMatching) {
+        CustomEvent deleteStandbyEvent = new CustomEvent(this, DELETE_RELATED_MATCHING_STAND_BY_DATA,
+                findMatching.getHostMember().getMemberId());
+        eventPublisher.publishEvent(deleteStandbyEvent);
+
+        CustomEvent deleteMarkerEvent = new CustomEvent(this, DELETE_MARKER,
+                findMatching.getHostMember().getEmail());
+        eventPublisher.publishEvent(deleteMarkerEvent);
+    }
+
 
     public void updateMatchForCustomEvent(Long hostMemberId, Long guestMemberId) {
         List<Matching> findMatchings = matchingRepository.findByHostMemberIdOrHostMemberId(hostMemberId, guestMemberId);
@@ -74,6 +88,7 @@ public class MatchingService {
         List<Matching> updatedMatchings = findMatchings.stream()
                 .filter(m -> m.getMatchStatus() != Matching.MatchStatus.MATCH_SUCCESS)
                 .peek(m -> m.setMatchStatus(Matching.MatchStatus.MATCH_SUCCESS))
+
                 .collect(Collectors.toList());
 
         if (!updatedMatchings.isEmpty()) {

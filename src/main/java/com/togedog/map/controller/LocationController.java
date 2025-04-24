@@ -15,7 +15,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000")  // localhost:3000에서 오는 요청을 허용
 public class LocationController {
 
     @Value("${kakao.api.key}")
@@ -86,6 +86,7 @@ public class LocationController {
 //        LocationService.Location location = locationService.getLocationManual("user:location:" + userEmail);
 //        return ResponseEntity.ok(location);
 //    }
+
 
     @Getter
     @Setter
